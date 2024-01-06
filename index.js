@@ -10,15 +10,13 @@ fs.unlink('file.js', (err) => {
   }
 });
 
-let data = ""
 
 for (let n = 0; n < randomWords.length; n++) {
-  const randomN = Math.ceil(Math.random() * randomWords.length)
-  data = data + randomWords[randomN] + " "
+  const randomN = Math.floor(Math.random() * randomWords.length)
+  fs.appendFile(`${__dirname}/file.js`, randomWords[randomN] + '\n', function(err) {
+    if (err) throw err;
+    console.log("It's saved!");
+  });
 }
 
-fs.writeFile(`${__dirname}/file.js`, data, { flag: 'wx' }, function(err) {
-  if (err) throw err;
-  console.log("It's saved!");
-});
 
